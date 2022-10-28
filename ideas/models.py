@@ -8,3 +8,10 @@ class Administrator(models.Model):
 
     def __str__(self):
         return 'Administrator profile {}.'.format(self.user.username)
+
+class Local(models.Model):
+    number = models.IntegerField()
+    area = models.IntegerField()
+
+    def __str__(self):
+        return self.name
