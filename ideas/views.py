@@ -5,8 +5,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, DetailView
 
-from .models import Administrator, Local
-
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
     fields = '__all__'
