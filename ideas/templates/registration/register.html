@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="header-bar">
-          <h1 style="text-align: center;">Rejestracja zarządcy</h1>
+          <h1 style="text-align: center;">Rejestracja użytkownika</h1>
     </div>
 
     <div class="card-body">
@@ -14,6 +14,9 @@
 
             <label><b>Hasło</b></label>
             {{ form.password1 }}
+
+            <label><b>Powtórz hasło</b></label>
+            {{ form.password2 }}
 
             <input style="margin-top:10px ; margin-left:125px" class="button" type="submit" value="Zarejestruj">
         </form>

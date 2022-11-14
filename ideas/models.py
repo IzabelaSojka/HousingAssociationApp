@@ -15,6 +15,7 @@ class Local(models.Model):
 
 
 class Billing(models.Model):
+    id = models.AutoField(primary_key = True)
     owner = models.ForeignKey(Local, on_delete=models.CASCADE, null=False, blank=False)
     value = models.DecimalField(("Kwota do zapłaty"), max_digits=100, decimal_places=2)
     status = models.BooleanField(("Czy zapłacone?"))
@@ -22,15 +23,15 @@ class Billing(models.Model):
     end_billing = models.DateField(("Koniec okresu rozliczeniowego"), null=False, blank=False)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 class Report(models.Model):
+    id = models.AutoField(primary_key=True)
     id_b = models.OneToOneField(Billing, on_delete=models.CASCADE)
-    file = models.FileField(("Plik"), upload_to='pdf/')
     number_local = models.ForeignKey(Local, on_delete=models.CASCADE, null=True, blank=False)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 

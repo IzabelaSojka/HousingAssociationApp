@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, DetailView, CreateView
 
-from ideas.models import Local
+from ideas.models import Local, Billing
 
 
 class CustomLoginView(LoginView):
@@ -34,3 +34,10 @@ class LocalCreate(LoginRequiredMixin, CreateView):
         form.instance.admin = self.request.user
         return super(LocalCreate, self).form_valid(form)
 
+class BillingCreate(CreateView):
+    template_name = 'registration/billing_create.html'
+    model = Billing
+    fields = ['owner', 'value', 'status', 'start_billing', 'end_billing']
+
+    def form_valid(self, form):
+        return super(BillingCreate, self).form_valid(form)

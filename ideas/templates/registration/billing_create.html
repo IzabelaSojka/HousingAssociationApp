@@ -1,0 +1,17 @@
+{% extends 'registration/main.html' %}
+
+{% block content %}
+    <div class="header-bar">
+          <h1 style="text-align: center;">Dodawanie rachunku</h1>
+    </div>
+
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input style="margin-top:10px ; margin-left:150px" class="button" type="submit" value="Dodaj rachunek">
+        </form>
+
+    </div>
+
+{% endblock content %}
