@@ -1,3 +1,5 @@
+from msilib.schema import ListView
+
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -41,3 +43,14 @@ class BillingCreate(CreateView):
 
     def form_valid(self, form):
         return super(BillingCreate, self).form_valid(form)
+
+
+class LocalList(ListView):
+    template_name = 'registration/local_list.html'
+    model = Local
+    context_object_name = 'locals'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['locals'] = context['locals'].filter(user=self.request.user)
+    #     return context

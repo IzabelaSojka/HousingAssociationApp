@@ -1,0 +1,18 @@
+<meta http-equiv="refresh" content="60">
+{% extends 'registration/main.html' %}
+{% block content %}
+
+    <h1></h1>
+ <h1>Lista lokali w twojej wspólnocie:</h1>
+
+    <div class="local-items-wrapper">
+        {% for local in locals %}
+            <div class="local-wrapper">
+                <a class="button">{{ local }}</a>
+            </div>
+        {% empty %}
+            <h3>Lista lokali jest pusta</h3>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
