@@ -1,150 +1,92 @@
 <!DOCTYPE html>
-<html>
+{% load static %}
+
+<html lang="en">
+
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Wspólnota</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Luxurious+Roman&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Shadows+Into+Light&display=swap"
-          rel="stylesheet">
-
-    <style>
-        body {
-            background-color: #FAFAFA;
-            font-family: 'Aleo', cursive;
-            padding-top: 50px;
-        }
-
-        h2,
-        h3,
-        h4,
-        h5,
-        a,
-        p {
-            color: black;
-        }
-
-        a {
-            font-weight: 600;
-        }
-
-        .container {
-            max-width: 400px;
-            margin: auto;
-            background-color: rgba(238, 226, 226, 0.06);
-            -webkit-box-shadow: 2px 3px 13px -4px rgb(9, 3, 3);
-            box-shadow: 2px 3px 13px -4px rgb(9, 3, 3);
-        }
-
-        input {
-            outline: none;
-            border: none;
-        }
-
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            color: #090303;
-            padding: 10px;
-            border-radius: 5px 5px 0 0;
-            background: rgba(0, 0, 0, 0.35);
-        }
-
-        .header-bar a {
-            color: rgb(9, 3, 3);
-            text-decoration: none;
-        }
-        .local-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            background-color: #f5ecce;
-            border-top: 1px solid #7da444;
-        }
-        .delete {
-            text-decoration: none;
-            font-weight: 900;
-            color: #d00808;
-            font-size: 32px;
-            line-height: 0;
-        }
-        #search-wrapper{
-            display: flex;
-            justify-content: space-between;
-            aligin-items: center;
-            padding: 10px;
-        }
-        .handle {
-            display: inline-block;
-            padding: 20px 16px;
-            cursor: grab;
-            user-select: none;
-        }
-
-        .handle:after,
-        .handle:before {
-            display: block;
-            content: "";
-        }
-
-        .handle:active,
-        .handle:active:before,
-        .handle:active:after {
-            cursor: grabbing;
-        }
-
-        .dropArea {
-            background-color: #f1f2f6;
-            color: black;
-            border: #ced6e0 1px solid;
-        }
-
-        .selectedTask {
-            opacity: 0.6;
-        }
-
-        input[type=text],
-        input[type=password],
-        textarea {
-            border: 1px solid #757575;
-            border-radius: 5px;
-            padding: 10px;
-            width: 90%;
-        }
-
-        label {
-            padding-top: 10px !important;
-            display: block;
-        }
-
-        .button {
-            border: 1px solid black;
-            background-color: rgba(131, 122, 122, 0.35);
-            color: #090303;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Wspólnota</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 </head>
-<body>
-<div class="container">
-    {% block content %}
 
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Wspólnota</a>        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Profile</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Options
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Books</a>
+                <a class="dropdown-item" href="#">Wikipedia</a>
+                <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item" href="#">Dictionary</a>
+                <a class="dropdown-item" href="#">Youtube</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">To-do</a>
+                <a class="dropdown-item" href="#">Homework</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Notes</a>
+                <a class="dropdown-item" href="#">Conversion</a>
+                <div class="dropdown-divider"></div>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <br /><br />
+  <main>
+
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-{{ msg.tags }}">{{ msg }}</div>
+        {%  endfor %}
+    {% endif %}
+    {% block content %}
     {% endblock content %}
-</div>
+
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
 </body>
+
 </html>

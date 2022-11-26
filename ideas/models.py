@@ -7,12 +7,13 @@ class Local(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner', null=True, blank=True)
     number = models.IntegerField(("Numer lokalu"), null=False, blank=False)
     area = models.DecimalField(("Powierzchnia"), max_digits=100, decimal_places=2)
-    first_name = models.CharField(("Imię"), max_length=255, null=True, blank=True)
-    last_name = models.CharField(("Nazwisko"), max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.number
 
+    class Meta:
+        verbose_name = "local"
+        verbose_name_plural = "local"
 
 class Billing(models.Model):
     id = models.AutoField(primary_key = True)

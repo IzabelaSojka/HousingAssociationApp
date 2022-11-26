@@ -7,9 +7,14 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, DetailView, CreateView
+from django.contrib import messages
+from django.contrib.auth.models import User
 
+from ideas.forms import LocalForm
 from ideas.models import Local, Billing
 
+def home(request):
+    return render(request,'registration/home.html')
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
@@ -27,30 +32,20 @@ class RegisterPage(FormView):
             login(self.request, user)
         return super(RegisterPage, self).form_valid(form)
 
-class LocalCreate(LoginRequiredMixin, CreateView):
-    template_name = 'registration/local_create.html'
-    model = Local
-    fields = ['number', 'area', 'owner', 'first_name', 'last_name']
 
-    def form_valid(self, form):
-        form.instance.admin = self.request.user
-        return super(LocalCreate, self).form_valid(form)
-
-class BillingCreate(CreateView):
-    template_name = 'registration/billing_create.html'
-    model = Billing
-    fields = ['owner', 'value', 'status', 'start_billing', 'end_billing']
-
-    def form_valid(self, form):
-        return super(BillingCreate, self).form_valid(form)
-
-
-class LocalList(ListView):
-    template_name = 'registration/local_list.html'
-    model = Local
-    context_object_name = 'locals'
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['locals'] = context['locals'].filter(user=self.request.user)
-    #     return context
+def local(request):
+    if request.method == "POST":
+        form = LocalForm(request.POST)
+        if form.is_valid():
+            local = Local(admin=request.user, owner=request.user, number=request.POST['number'], area=request.POST['area'])
+            local.save()
+        messages.success(request, f"Lokal został dodany")
+    else:
+        form = LocalForm()
+    form = LocalForm()
+    local = Local.objects.filter(admin=request.user)
+    context = {
+            'locals': local,
+            'form': form,
+    }
+    return render(request, 'registration/local.html', context)

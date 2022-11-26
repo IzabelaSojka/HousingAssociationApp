@@ -1,0 +1,59 @@
+{% extends 'registration/main.html' %}
+{% load static %}
+{% block content %}
+
+<section class="container text-center">
+  <h3>Witaj</h3>
+
+  <hr> <br>
+  <div class="row">
+    <div class="col-md-3">
+      <a href="#">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title ">
+              Mieszkańcy
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="{% url 'local' %}">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title ">
+              Lokale
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="#">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title ">
+              Rachunki
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="#">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title ">
+              Sprawozdania
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  </div>
+
+
+</section>
+{% endblock content %}
