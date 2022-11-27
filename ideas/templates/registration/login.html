@@ -1,23 +1,17 @@
-{% extends 'registration/main.html' %}
-
-{% block content %}
-    <div class="header-bar">
-          <h1 style="text-align: center;">Logowanie</h1>
+<div class="container">
+  <form method="POST">
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Log In</legend>
+    </fieldset>
+    <div class="form-group">
+      <button href="" class="btn btn-outline-info" type="submit">
+        Sign In
+      </button>
     </div>
-
-    <div class="card-body">
-        <form method="POST">
-            {% csrf_token %}
-
-            <label><b>Nazwa użytkownika</b></label>
-            {{ form.username }}
-
-            <label><b>Hasło</b></label>
-            {{ form.password }}
-
-            <input style="margin-top:10px ; margin-left:150px" class="button" type="submit" value="Zaloguj">
-        </form>
-
-    </div>
-
-{% endblock content %}
+  </form>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+        Jeśli nie masz konta zgłoś się do zarządcy!!!
+    </small>
+  </div>
+</div>

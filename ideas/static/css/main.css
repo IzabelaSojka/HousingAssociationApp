@@ -31,7 +31,7 @@ footer {
 
 
 .card-header:hover {
-    background: rgb(11, 22, 83) !important;
+    background: rgb(9, 3, 3) !important;
     color: whitesmoke !important;
     transition: 0.1s ease-in;
 }
@@ -49,7 +49,7 @@ a:hover {
 
 
 .custom-header:hover {
-    background: rgb(143, 189, 186) !important;
+    background: rgb(9, 3, 3) !important;
 }
 
 .card-header {
@@ -96,7 +96,7 @@ a:hover {
 
     padding: .8em 1.4em;
     padding-right: 4.7em;
-    background: #009ED8;
+    background: #090303;
     border: none;
     color: white;
 }
@@ -105,11 +105,11 @@ a:hover {
     height: 210px;
 }
 
-/* .card:hover {
+ .card:hover {
     opacity: 0.9;
     transform: scale(1.02);
     transition: 0.5s ease;
-} */
+}
 
 html,
 body {
@@ -129,7 +129,7 @@ body {
 
 
 .card-header {
-    background-color: rgb(133, 204, 231);
+    background-color: rgb(9, 3, 3);
 }
 
 
@@ -155,7 +155,7 @@ body {
 }
 
 .btn:hover {
-    background: black;
+    background: rgba(0, 0, 0, 0.39);
     color: white;
     border: 0.5px solid white;
 }

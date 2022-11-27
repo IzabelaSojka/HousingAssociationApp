@@ -10,7 +10,7 @@ from django.views.generic import FormView, DetailView, CreateView
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from ideas.forms import LocalForm, BillingForm
+from ideas.forms import LocalForm, BillingForm, UserRegistrationForm
 from ideas.models import Local, Billing
 
 def home(request):
@@ -84,7 +84,7 @@ def billing(request):
             messages.success(request, f"Rachunek został dodany")
         else:
             form = BillingForm()
-    billing = Billing.objects.filter(admin=request.user)
+    billing = Billing.objects.all()
     context = {
         'billings': billing,
         'form': form,
@@ -101,4 +101,18 @@ def billing_update(request, pk=None):
     billing.save()
     return redirect('billing')
 
+def resident(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Dodano nowego mieszkańca")
+    else :
+        form= UserRegistrationForm()
+    resident = User.objects.all()
+    context = {
+        'residents' : resident,
+        'form' : form,
+    }
+    return render(request, 'registration/resident.html', context)
 
