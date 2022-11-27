@@ -9,19 +9,21 @@ class Local(models.Model):
     area = models.DecimalField(("Powierzchnia"), max_digits=100, decimal_places=2)
 
     def __str__(self):
-        return self.number
+        return str(self.number)
 
     class Meta:
         verbose_name = "local"
         verbose_name_plural = "local"
 
 class Billing(models.Model):
+    admin = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     id = models.AutoField(primary_key = True)
     owner = models.ForeignKey(Local, on_delete=models.CASCADE, null=False, blank=False)
     value = models.DecimalField(("Kwota do zapłaty"), max_digits=100, decimal_places=2)
     status = models.BooleanField(("Czy zapłacone?"))
     start_billing = models.DateField(("Początek okresu rozliczeniowego"), null=False, blank=False)
     end_billing = models.DateField(("Koniec okresu rozliczeniowego"), null=False, blank=False)
+    payment_date = models.DateField(("Termin płatności"), null=True, blank=True)
 
     def __str__(self):
         return str(self.id)
