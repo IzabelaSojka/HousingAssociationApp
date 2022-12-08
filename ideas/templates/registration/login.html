@@ -1,17 +1,23 @@
+{% extends 'registration/main.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
 <div class="container">
   <form method="POST">
     <fieldset class="form-group">
-      <legend class="border-bottom mb-4">Log In</legend>
+      <legend class="border-bottom mb-4">Logowanie</legend>
+        {% csrf_token %}
+        <label>Nazwa użytkownika</label><br>
+        {{ form.username}}
+        <br><label>Hasło</label><br>
+        {{ form.password}}
     </fieldset>
     <div class="form-group">
       <button href="" class="btn btn-outline-info" type="submit">
-        Sign In
+        Zaloguj
       </button>
     </div>
   </form>
-  <div class="border-top pt-3">
-    <small class="text-muted">
-        Jeśli nie masz konta zgłoś się do zarządcy!!!
-    </small>
-  </div>
+  <div class="border-top pt-3"></div>
 </div>
+{% endblock content %}

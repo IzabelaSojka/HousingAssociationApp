@@ -116,3 +116,10 @@ def resident(request):
     }
     return render(request, 'registration/resident.html', context)
 
+def resident_billing(request):
+    local = Local.objects.filter(owner = request.user)
+    billing = Billing.objects.filter(owner = local.owner)
+    context = {
+        'billings' : billing,
+    }
+    return render(request, 'registration/resident_billing.html', context)
