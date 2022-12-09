@@ -1,6 +1,7 @@
 from msilib.schema import ListView
 
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
@@ -10,11 +11,19 @@ from django.views.generic import FormView, DetailView, CreateView
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from ideas.forms import LocalForm, BillingForm, UserRegistrationForm
+from ideas.forms import LocalForm, BillingForm, UserRegistrationForm, UserEditForm
 from ideas.models import Local, Billing
 
 def home(request):
-    return render(request,'registration/home.html')
+    locals = Local.objects.all()
+    logged = 'resident'
+    for local in locals:
+        if local.admin == request.user:
+            logged = 'admin'
+            break
+
+    context = {'logged': logged,}
+    return render(request,'registration/home.html', context)
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
@@ -123,3 +132,16 @@ def resident_billing(request):
         'billings' : billing,
     }
     return render(request, 'registration/resident_billing.html', context)
+
+@login_required
+def editUser(request):
+    if request.method == 'POST':
+        form = UserEditForm(instance=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UserEditForm(instance=request.user)
+    context = {
+     'form': form,
+    }
+    return render(request, 'registration/edit_user.html', context)

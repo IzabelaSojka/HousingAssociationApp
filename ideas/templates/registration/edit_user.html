@@ -6,16 +6,13 @@
     <div class="card-body">
         <form method="POST">
         <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Logowanie</legend>
+          <legend class="border-bottom mb-4">Edycja profilu</legend>
             {% csrf_token %}
-            <label>Nazwa użytkownika</label><br>
-            {{ form.username}}
-            <br><label>Hasło</label><br>
-            {{ form.password}}
+            {{ form|crispy}}
         </fieldset>
         <div class="form-group">
           <button href="" class="btn btn-outline-info" type="submit">
-            Zaloguj
+            Zapisz
           </button>
         </div>
       </form>

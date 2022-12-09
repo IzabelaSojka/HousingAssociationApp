@@ -4,9 +4,9 @@
 
 <section class="container text-center">
   <h3>Witaj</h3>
-
-  <hr> <br>
-  <div class="row">
+    <hr> <br>
+    {% if logged == 'admin' %}
+        <div class="row">
     <div class="col-md-3">
       <a href="{% url 'resident' %}">
         <div class="card">
@@ -53,7 +53,43 @@
     </div>
   </div>
   </div>
-
+  {% else %}
+  <div class="row">
+    <div class="col">
+      <a href="#">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title ">
+              Rachunki
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col">
+      <a href="#">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title ">
+              Sprawozdania
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+      <div class="col">
+          <a href="#">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title ">
+                  Zarządca
+                </h5>
+              </div>
+            </div>
+          </a>
+        </div>
+  </div>
+  {% endif %}
 
 </section>
 {% endblock content %}
