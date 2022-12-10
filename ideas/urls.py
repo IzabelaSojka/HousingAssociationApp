@@ -5,6 +5,7 @@ from django.urls import path
 
 from django.contrib.auth import views as auth_views
 from . import views
+from .notification import showFirebaseJS
 from .views import *
 
 urlpatterns = [
@@ -20,6 +21,9 @@ urlpatterns = [
     path('editUser/',views.editUser, name='edit_user'),
     #path('adminDetail/',views.administrator, name='admin_detail'),
     path('resident_billing/',views.resident_billing, name='resident_billing'),
-    path('billing_history', billing_history, name='billing_history')
+    path('billing_history', billing_history, name='billing_history'),
+    path('firebase-messaging-sw.js', showFirebaseJS, name="show_firebase_js"),
+    path('send/', send)
+
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
