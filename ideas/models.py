@@ -4,7 +4,7 @@ from django.conf import settings
 
 class Local(models.Model):
     admin = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin', null=True, blank=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner', null=True, blank=True)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='owner', null=True, blank=True)
     number = models.IntegerField(("Numer lokalu"), null=False, blank=False)
     area = models.DecimalField(("Powierzchnia"), max_digits=100, decimal_places=2)
 

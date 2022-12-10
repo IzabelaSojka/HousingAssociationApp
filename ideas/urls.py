@@ -18,5 +18,8 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
     path('editUser/',views.editUser, name='edit_user'),
+    #path('adminDetail/',views.administrator, name='admin_detail'),
+    path('resident_billing/',views.resident_billing, name='resident_billing'),
+    path('billing_history', billing_history, name='billing_history')
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

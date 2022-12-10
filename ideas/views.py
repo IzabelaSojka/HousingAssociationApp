@@ -68,7 +68,6 @@ def local_delete(request, pk=None):
     return redirect("local")
 
 def billing(request):
-    form = BillingForm()
     if request.method == "POST":
         form = BillingForm(request.POST)
         if form.is_valid():
@@ -91,14 +90,21 @@ def billing(request):
             )
             billing.save()
             messages.success(request, f"Rachunek został dodany")
-        else:
-            form = BillingForm()
-    billing = Billing.objects.all()
+    else:
+        form = BillingForm()
+    billing = Billing.objects.filter(status=False).filter(admin=request.user)
     context = {
         'billings': billing,
         'form': form,
     }
     return render(request, 'registration/billing.html', context)
+
+def billing_history(request):
+    billing = Billing.objects.filter(status=True).filter(admin=request.user)
+    context = {
+        'billings': billing,
+    }
+    return render(request, 'registration/billing_history.html', context)
 
 
 def billing_update(request, pk=None):
@@ -126,10 +132,18 @@ def resident(request):
     return render(request, 'registration/resident.html', context)
 
 def resident_billing(request):
-    local = Local.objects.filter(owner = request.user)
-    billing = Billing.objects.filter(owner = local.owner)
+    local = Local.objects.get(owner = request.user)
+    billing = Billing.objects.filter(owner = local.id).filter(status=False)
     context = {
         'billings' : billing,
+    }
+    return render(request, 'registration/resident_billing.html', context)
+
+def resident_billing_history(request):
+    local = Local.objects.get(owner=request.user)
+    billing = Billing.objects.filter(owner=local.id).filter(status=True)
+    context = {
+        'billings': billing,
     }
     return render(request, 'registration/resident_billing.html', context)
 
@@ -145,3 +159,11 @@ def editUser(request):
      'form': form,
     }
     return render(request, 'registration/edit_user.html', context)
+
+# def administrator(request):
+#     local = Local.objects.filter(owner = request.user)
+#     administrator = User.objects.get(id=local.admin)
+#     context = {
+#         'administrator': administrator,
+#     }
+#     return(request, 'registration/admin_profile.html', context)

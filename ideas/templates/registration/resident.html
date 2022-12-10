@@ -14,21 +14,7 @@
                       <div class="modal-body">
                             <div method="POST">
                                 {% csrf_token %}
-                                <label><b>Nazwa mieszkańca</b></label>
-                                {{ form.username|as_crispy_field}}
-                                WYMAGANE. Litery, cyfry, znaki: (@ . + - _)
-
-                                <label><b>Hasło</b></label>
-                                {{ form.password1|as_crispy_field}}
-                                <br>
-                                -Nie może być podobne do nazwy użytkownika<br>
-                                -Musi zawierać co najmniej 8 znaków<br>
-                                -Nie może być często używane<br>
-                                -Nie może się składać z samych cyfr<br>
-
-                                <label><b>Powtórz hasło</b></label>
-                                {{ form.password2|as_crispy_field}}
-
+                                {{ form|crispy}}
                                 <div class="form-group">
                                     <button href="" class="btn btn-outline-info" type="submit">
                                         Zapisz
