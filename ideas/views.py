@@ -1,3 +1,4 @@
+import datetime
 from msilib.schema import ListView
 
 from django.contrib.auth import login, authenticate
@@ -5,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, DetailView, CreateView
@@ -13,13 +15,19 @@ from django.contrib.auth.models import User
 
 from ideas.forms import LocalForm, BillingForm, UserRegistrationForm, UserEditForm
 from ideas.models import Local, Billing
+from ideas.notification import send_notification
+
 
 def home(request):
+
     locals = Local.objects.all()
-    logged = 'resident'
+    logged = 'nobody'
     for local in locals:
         if local.admin == request.user:
             logged = 'admin'
+            break
+        elif local.owner == request.user:
+            logged = 'resident'
             break
 
     context = {'logged': logged,}
@@ -167,3 +175,24 @@ def editUser(request):
 #         'administrator': administrator,
 #     }
 #     return(request, 'registration/admin_profile.html', context)
+
+# def send():
+#     billings = Billing.objects.filter(status = False)
+#     now = datetime.date.today()
+#     now = now.strftime('%d %m %Y')
+#     now = datetime.strptime(now, '%d %m %Y')
+#     nowDay = now.strftime('%d')
+#     nowMonth = now.strftime('%m')
+#     nowYear = now.strftime('%Y')
+#     for element in billings:
+#         time = element.payment_date
+#         time = time.strftime('%d %m %Y')
+#         time = datetime.strptime(time, '%d %m %Y')
+#         timeMonth = time.strftime('%m')
+#         timeYear = time.strftime('%Y')
+#         #if nowMonth == timeMonth and nowYear == timeYear:
+#             #dif = timeDay - nowDay
+#         diff = abs((datetime.date(time[0],time[1],time[2]) - datetime.date(now[0],now[1],now[2])).days)
+#         print(diff)
+
+

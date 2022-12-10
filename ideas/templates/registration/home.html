@@ -53,7 +53,7 @@
     </div>
   </div>
   </div>
-  {% else %}
+  {% elif logged == 'resident' %}
   <div class="row">
     <div class="col">
       <a href="{% url 'resident_billing' %}">
@@ -78,7 +78,6 @@
       </a>
     </div>
       <div class="col">
-
           <a href='#'>
             <div class="card">
                 <div class="card-body">
@@ -90,6 +89,18 @@
           </a>
         </div>
   </div>
+  {% else %}
+       <div class="col">
+      <a href="{% url 'login' %}">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title ">
+              Zaloguj się, aby zobaczyć więcej
+            </h5>
+                Kliknij
+          </div>
+        </div>
+      </a>
   {% endif %}
 
 </section>

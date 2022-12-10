@@ -23,7 +23,7 @@ urlpatterns = [
     path('resident_billing/',views.resident_billing, name='resident_billing'),
     path('billing_history', billing_history, name='billing_history'),
     path('firebase-messaging-sw.js', showFirebaseJS, name="show_firebase_js"),
-    path('send/', send)
+    #path('send/', send)
 
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
