@@ -13,13 +13,11 @@ from django.views.generic import FormView, DetailView, CreateView
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from ideas.forms import LocalForm, BillingForm, UserRegistrationForm, UserEditForm
-from ideas.models import Local, Billing
+from ideas.forms import LocalForm, BillingForm, UserRegistrationForm, UserEditForm, FileUploadForm, FileUploadForm2
+from ideas.models import Local, Billing, Report
 from ideas.notification import send_notification
 
-
-def home(request):
-
+def whoLogged(request):
     locals = Local.objects.all()
     logged = 'nobody'
     for local in locals:
@@ -29,8 +27,14 @@ def home(request):
         elif local.owner == request.user:
             logged = 'resident'
             break
+    return logged
 
-    context = {'logged': logged,}
+
+def home(request):
+    logged = whoLogged(request)
+    context = {
+        'logged': logged,
+    }
     return render(request,'registration/home.html', context)
 
 class CustomLoginView(LoginView):
@@ -168,31 +172,23 @@ def editUser(request):
     }
     return render(request, 'registration/edit_user.html', context)
 
-# def administrator(request):
-#     local = Local.objects.filter(owner = request.user)
-#     administrator = User.objects.get(id=local.admin)
-#     context = {
-#         'administrator': administrator,
-#     }
-#     return(request, 'registration/admin_profile.html', context)
-
-# def send():
-#     billings = Billing.objects.filter(status = False)
-#     now = datetime.date.today()
-#     now = now.strftime('%d %m %Y')
-#     now = datetime.strptime(now, '%d %m %Y')
-#     nowDay = now.strftime('%d')
-#     nowMonth = now.strftime('%m')
-#     nowYear = now.strftime('%Y')
-#     for element in billings:
-#         time = element.payment_date
-#         time = time.strftime('%d %m %Y')
-#         time = datetime.strptime(time, '%d %m %Y')
-#         timeMonth = time.strftime('%m')
-#         timeYear = time.strftime('%Y')
-#         #if nowMonth == timeMonth and nowYear == timeYear:
-#             #dif = timeDay - nowDay
-#         diff = abs((datetime.date(time[0],time[1],time[2]) - datetime.date(now[0],now[1],now[2])).days)
-#         print(diff)
+def fileView(request):
+    if request.method == 'POST':
+        form = FileUploadForm2(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Dodano nowegy plik")
+        else:
+            messages.error(request, f"Niepoprawny plik")
+    else :
+        form= FileUploadForm2(request.POST, request.FILES)
+    reports = Report.objects.all()
+    logged = whoLogged(request)
+    context = {
+        'reports' : reports,
+        'form' : form,
+        'logged': logged
+    }
+    return render(request, 'registration/reports.html', context)
 
 

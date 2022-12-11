@@ -25,3 +25,12 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']
+
+class FileUploadForm(forms.Form):
+    file_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    file_data = forms.FileField(widget=forms.FileInput(attrs={'class': 'form-control'}))
+
+class FileUploadForm2(forms.ModelForm):
+    class Meta:
+        model = Report
+        fields = ['file_name', 'my_file']

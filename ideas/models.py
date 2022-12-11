@@ -31,10 +31,10 @@ class Billing(models.Model):
 
 class Report(models.Model):
     id = models.AutoField(primary_key=True)
-    id_b = models.OneToOneField(Billing, on_delete=models.CASCADE)
-    number_local = models.ForeignKey(Local, on_delete=models.CASCADE, null=True, blank=False)
+    file_name = models.CharField(("Nazwa pliku"), max_length=255, null=True)
+    my_file = models.FileField(("Plik"), upload_to='', null=True)
 
     def __str__(self):
-        return str(self.id)
+        return self.file_name
 
 
