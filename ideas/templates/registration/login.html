@@ -5,20 +5,17 @@
 <div class="container">
     <div class="card-body">
         <form method="POST">
-        <fieldset class="form-group">
-          <legend class="border-bottom mb-4"><b>Logowanie</b></legend>
-            {% csrf_token %}
-            {{ form|crispy}}
-        </fieldset>
-        <div class="form-group">
-          <button href="" class="btn btn-outline-info" type="submit">
-            Zaloguj
-          </button>
-        </div>
-            Nie masz konta?
-            <a href="{% url 'register' %}">Zarejestruj się</a>
-      </form>
-      <div class="border-top pt-3"></div>
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"><b>Logowanie</b></legend>
+                {% csrf_token %}
+                {{ form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button href="" class="btn btn-dark" type="submit">Zaloguj</button>
+            </div>
+                Nie masz konta?
+                <a href="{% url 'register' %}">Zarejestruj się</a>
+          </form>
     </div>
 </div>
 {% endblock content %}

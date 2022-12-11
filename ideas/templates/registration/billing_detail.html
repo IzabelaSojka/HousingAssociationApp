@@ -1,0 +1,32 @@
+{% extends 'registration/main.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container">
+    <p style="text-align: center">
+        <div class="card" style="width: 100%; height: 80%" >
+            <div class="card-body">
+                <h5 class="card-title"><b>Szczegóły rachunku</b></h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        Kwota:
+                        <p style="text-align: center">{{ billing.value }} zł</p>
+                    </li>
+                        <li class="list-group-item">
+                        Dane do przelewu:
+                        <p style="text-align: center"></p>
+                    </li>
+                    <li class="list-group-item">
+                        Okres rozliczeniowy:
+                        <p style="text-align: center">{{ billing.start_billing }} - {{ billing.end_billing }}</p>
+                    </li>
+                    <li class="list-group-item">
+                        Termin płatności:
+                        <p style="text-align: center">{{ billing.payment_date }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </p>
+</div>
+{% endblock content %}

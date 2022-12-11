@@ -128,6 +128,13 @@ def billing_update(request, pk=None):
     billing.save()
     return redirect('billing')
 
+def billing_detail(request, pk=None):
+    billing = Billing.objects.get(id=pk)
+    context = {
+        'billing': billing,
+    }
+    return render(request, 'registration/billing_detail.html', context)
+
 def resident(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)

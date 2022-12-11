@@ -16,7 +16,7 @@
                                 {% csrf_token %}
                                 {{ form|crispy}}
                                 <div class="form-group">
-                                    <button href="" class="btn btn-outline-info" type="submit">
+                                    <button href="" class="btn btn-dark" type="submit">
                                         Zapisz
                                     </button>
                                 </div>
@@ -28,17 +28,16 @@
       </div>
 </div>
 <div class="container" >
-<div class="form-group">
-            <button class="btn btn-outline-info" data-toggle="modal" data-target="#myModal">
+    <div class="form-group">
+         <button class="btn btn-dark" data-toggle="modal" data-target="#myModal">
                 Dodaj rachunek
+         </button>
+        <a href="{% url 'billing_history' %}">
+            <button  class="btn btn-dark" >
+                    Historia
             </button>
-    <a href="{% url 'billing_history' %}">
-        <button  class="btn btn-outline-info" >
-                Historia
-            </button>
-    </a>
-
-        </div>
+        </a>
+    </div>
 </div>
 <div class="container">
     <table class="table table-striped table-bordered table-hover table-dark">
@@ -49,12 +48,13 @@
                 <th scope="col">Wartość</th>
                 <th scope="col">Termin płatności</th>
                 <th scope="col">Status</th>
+                <th scope="col">Szczegóły</th>
             </tr>
         </thead>
         <tbody>
             {% for billing in  billings %}
             <tr>
-                <th scope="row">{{ billing.id }}</th>
+                <th scope="row">{{ billing.id }} </th>
                 <td>{{ billing.owner }}</td>
                 <td>{{ billing.value }}</td>
                 <td>{{ billing.payment_date | date:"d/m/Y" }}</td>
@@ -70,6 +70,13 @@
                                 Zapłacony
                             </label>
                         </div>
+                    </a>
+                </td>
+                <td style="text-align: center">
+                    <a href="{% url 'billing_detail' billing.id%}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" class="bi bi-file-earmark" viewBox="0 0 448 512">
+                    <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                </svg>
                     </a>
                 </td>
             </tr>

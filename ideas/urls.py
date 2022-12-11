@@ -23,7 +23,8 @@ urlpatterns = [
     path('resident_billing/',views.resident_billing, name='resident_billing'),
     path('billing_history', billing_history, name='billing_history'),
     path('firebase-messaging-sw.js', showFirebaseJS, name="show_firebase_js"),
-    path('documents/', views.fileView, name='documents')
+    path('documents/', views.fileView, name='documents'),
+    path('billing_detail/<int:pk>', views.billing_detail, name='billing_detail'),
     #path('send/', send)
 
 
