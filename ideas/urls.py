@@ -25,6 +25,7 @@ urlpatterns = [
     path('firebase-messaging-sw.js', showFirebaseJS, name="show_firebase_js"),
     path('documents/', views.fileView, name='documents'),
     path('billing_detail/<int:pk>', views.billing_detail, name='billing_detail'),
+    path('resident_detail/<int:pk>', views.resident_detail, name='resident_detail'),
     #path('send/', send)
 
 

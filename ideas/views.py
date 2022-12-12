@@ -17,6 +17,7 @@ from ideas.forms import LocalForm, BillingForm, UserRegistrationForm, UserEditFo
 from ideas.models import Local, Billing, Report
 from ideas.notification import send_notification
 
+
 def whoLogged(request):
     locals = Local.objects.all()
     logged = 'nobody'
@@ -35,12 +36,14 @@ def home(request):
     context = {
         'logged': logged,
     }
-    return render(request,'registration/home.html', context)
+    return render(request, 'registration/home.html', context)
+
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
     fields = '__all__'
     redirect_authenticated_user = True
+
 
 class RegisterPage(FormView):
     template_name = 'registration/register.html'
@@ -70,14 +73,16 @@ def local(request):
         form = LocalForm()
     local = Local.objects.filter(admin=request.user)
     context = {
-            'locals': local,
-            'form': form,
+        'locals': local,
+        'form': form,
     }
     return render(request, 'registration/local.html', context)
+
 
 def local_delete(request, pk=None):
     Local.objects.get(id=pk).delete()
     return redirect("local")
+
 
 def billing(request):
     if request.method == "POST":
@@ -111,6 +116,7 @@ def billing(request):
     }
     return render(request, 'registration/billing.html', context)
 
+
 def billing_history(request):
     billing = Billing.objects.filter(status=True).filter(admin=request.user)
     context = {
@@ -128,6 +134,7 @@ def billing_update(request, pk=None):
     billing.save()
     return redirect('billing')
 
+
 def billing_detail(request, pk=None):
     billing = Billing.objects.get(id=pk)
     context = {
@@ -135,28 +142,41 @@ def billing_detail(request, pk=None):
     }
     return render(request, 'registration/billing_detail.html', context)
 
+
 def resident(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, f"Dodano nowego mieszkańca")
-    else :
-        form= UserRegistrationForm()
+    else:
+        form = UserRegistrationForm()
     resident = User.objects.all()
     context = {
-        'residents' : resident,
-        'form' : form,
+        'residents': resident,
+        'form': form,
     }
     return render(request, 'registration/resident.html', context)
 
-def resident_billing(request):
-    local = Local.objects.get(owner = request.user)
-    billing = Billing.objects.filter(owner = local.id).filter(status=False)
+
+def resident_detail(request, pk=None):
+    resident = User.objects.get(id=pk)
+    local = Local.objects.get(owner=pk)
     context = {
-        'billings' : billing,
+        'resident': resident,
+        'local': local,
+    }
+    return render(request, 'registration/resident_detail.html', context)
+
+
+def resident_billing(request):
+    local = Local.objects.get(owner=request.user)
+    billing = Billing.objects.filter(owner=local.id).filter(status=False)
+    context = {
+        'billings': billing,
     }
     return render(request, 'registration/resident_billing.html', context)
+
 
 def resident_billing_history(request):
     local = Local.objects.get(owner=request.user)
@@ -165,6 +185,7 @@ def resident_billing_history(request):
         'billings': billing,
     }
     return render(request, 'registration/resident_billing.html', context)
+
 
 @login_required
 def editUser(request):
@@ -175,9 +196,10 @@ def editUser(request):
     else:
         form = UserEditForm(instance=request.user)
     context = {
-     'form': form,
+        'form': form,
     }
     return render(request, 'registration/edit_user.html', context)
+
 
 def fileView(request):
     if request.method == 'POST':
@@ -187,15 +209,13 @@ def fileView(request):
             messages.success(request, f"Dodano nowegy plik")
         else:
             messages.error(request, f"Niepoprawny plik")
-    else :
-        form= FileUploadForm2(request.POST, request.FILES)
+    else:
+        form = FileUploadForm2(request.POST, request.FILES)
     reports = Report.objects.all()
     logged = whoLogged(request)
     context = {
-        'reports' : reports,
-        'form' : form,
+        'reports': reports,
+        'form': form,
         'logged': logged
     }
     return render(request, 'registration/reports.html', context)
-
-
