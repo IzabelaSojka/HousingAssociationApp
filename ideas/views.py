@@ -200,6 +200,29 @@ def editUser(request):
     }
     return render(request, 'registration/edit_user.html', context)
 
+def admin(request):
+    local = Local.objects.all()
+    admins = User.objects.all()
+    for x in local:
+        for y in admins:
+            if x.admin == y:
+                admin = y
+                return admin
+
+def adminEmail(request):
+    adminElement = admin(request)
+    context = {
+        'admin': adminElement
+    }
+    return render(request, 'registration/admin_email.html', context)
+
+def administrator(request):
+    adminElement = admin(request)
+    context = {
+        'admin': adminElement
+    }
+    return render(request, 'registration/admin_profile.html', context)
+
 
 def fileView(request):
     if request.method == 'POST':
