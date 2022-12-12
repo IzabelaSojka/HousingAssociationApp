@@ -33,8 +33,17 @@ def whoLogged(request):
 
 def home(request):
     logged = whoLogged(request)
+    billing_deadline = []
+    unpaid = []
+    if logged == 'resident':
+        billing = billing_list(request, False)
+        billing_deadline = deadlineAproaching(request, billing)
+        unpaid = unpaidBill(request, billing)
+
     context = {
         'logged': logged,
+        'billing_deadline': billing_deadline,
+        'unpaid': unpaid,
     }
     return render(request, 'registration/home.html', context)
 
@@ -137,8 +146,10 @@ def billing_update(request, pk=None):
 
 def billing_detail(request, pk=None):
     billing = Billing.objects.get(id=pk)
+    logged = whoLogged(request)
     context = {
         'billing': billing,
+        'logged': logged,
     }
     return render(request, 'registration/billing_detail.html', context)
 
@@ -168,10 +179,27 @@ def resident_detail(request, pk=None):
     }
     return render(request, 'registration/resident_detail.html', context)
 
+def billing_list(request, status):
+    local = Local.objects.get(owner=request.user)
+    billing = Billing.objects.filter(owner=local.id).filter(status=status)
+    return billing
+
+def deadlineAproaching(request, billing):
+    billing_deadline = []
+    for bill in billing:
+        if deltaTime(bill.payment_date) < 5 and deltaTime(bill.payment_date) >= 0:
+            billing_deadline.append(bill)
+    return billing_deadline
+
+def unpaidBill(request, billing):
+    unpaid=[]
+    for bill in billing:
+        if deltaTime(bill.payment_date) < 0:
+            unpaid.append(bill)
+    return unpaid
 
 def resident_billing(request):
-    local = Local.objects.get(owner=request.user)
-    billing = Billing.objects.filter(owner=local.id).filter(status=False)
+    billing = billing_list(request, False)
     context = {
         'billings': billing,
     }
@@ -179,8 +207,7 @@ def resident_billing(request):
 
 
 def resident_billing_history(request):
-    local = Local.objects.get(owner=request.user)
-    billing = Billing.objects.filter(owner=local.id).filter(status=True)
+    billing = billing_list(request, True)
     context = {
         'billings': billing,
     }
@@ -242,3 +269,8 @@ def fileView(request):
         'logged': logged
     }
     return render(request, 'registration/reports.html', context)
+
+def deltaTime(date):
+    now = datetime.date.today()
+    delta = date - now
+    return delta.days

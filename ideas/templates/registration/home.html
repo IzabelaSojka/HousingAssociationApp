@@ -54,6 +54,20 @@
   </div>
   </div>
   {% elif logged == 'resident' %}
+        {% for bill in  unpaid %}
+            <div class="alert alert-danger" role="alert">
+                Minał termin płatności:
+                <p style="text-align: center"><a href="{% url 'billing_detail' bill.id%}" class="alert-link">{{ bill.payment_date | date:"d/m/Y" }}    Kwota do zapłaty  {{ bill.value }}</a></p>
+            </div>
+        {% empty %}
+        {% endfor %}
+        {% for bill in  billing_deadline %}
+            <div class="alert alert-warning" role="alert">
+                Zbliża sie termin płatności:
+                <p style="text-align: center"><a href="{% url 'billing_detail' bill.id%}" class="alert-link">{{ bill.payment_date | date:"d/m/Y" }}    Kwota do zapłaty  {{ bill.value }}</a></p>
+            </div>
+        {% empty %}
+        {% endfor %}
   <div class="row">
     <div class="col">
       <a href="{% url 'resident_billing' %}">
@@ -101,6 +115,7 @@
           </div>
         </div>
       </a>
+        </div>
   {% endif %}
 
 </section>

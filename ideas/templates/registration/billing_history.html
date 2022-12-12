@@ -30,20 +30,7 @@
                 <td>{{ billing.owner }}</td>
                 <td>{{ billing.value }}</td>
                 <td>{{ billing.payment_date | date:"d/m/Y" }}</td>
-                <td>
-                    <a href="{% url 'billing_update' billing.id%}">
-                        <div class="form-check">
-                            {% if billing.status == True %}
-                            <input class="form-check-input" type="checkbox" value="" checked>
-                            {% else %}
-                            <input class="form-check-input" type="checkbox" value="">
-                            {% endif %}
-                            <label class="form-check-label text-light" for="flexCheckDefault">
-                                Zapłacony
-                            </label>
-                        </div>
-                    </a>
-                </td>
+                <td>Zapłacony</td>
                 <td style="text-align: center">
                     <a href="{% url 'billing_detail' billing.id%}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" class="bi bi-file-earmark" viewBox="0 0 448 512">

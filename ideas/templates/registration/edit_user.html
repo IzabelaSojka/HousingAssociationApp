@@ -2,6 +2,15 @@
 {% load static %}
 {% block content %}
 {% load crispy_forms_tags %}
+<div class="container" >
+    <div class="form-group">
+        <a href="{% url 'home' %}">
+            <button  class="btn btn-dark" >
+                    Powrót
+            </button>
+        </a>
+    </div>
+</div>
 <div class="container">
     <div class="card-body">
         <form method="POST">
