@@ -9,7 +9,7 @@ from django.contrib import messages
 
 def billing(request):
     if request.method == "POST":
-        form = BillingForm(request.POST)
+        form = BillingForm(request.POST, request.FILES)
         if form.is_valid():
             try:
                 paid = request.POST['status']

@@ -14,7 +14,7 @@ class BillingForm(forms.ModelForm):
     class Meta:
         model = Billing
         widgets = {'start_billing': DateInput(), 'end_billing': DateInput(), 'payment_date': DateInput()}
-        fields = ['owner', 'value', 'status', 'start_billing', 'end_billing', 'payment_date']
+        fields = ['owner', 'value','addressee_name', 'bank_account', 'status', 'start_billing', 'end_billing', 'payment_date', 'details']
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:

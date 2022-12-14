@@ -9,7 +9,7 @@ from ideas.forms import UserEditForm
 
 
 class CustomLoginView(LoginView):
-    template_name = 'registration/user/login.html'
+    template_name = 'registration/user/../templates/registration/login.html'
     fields = '__all__'
     redirect_authenticated_user = True
 
