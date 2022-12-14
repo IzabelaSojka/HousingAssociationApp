@@ -2,6 +2,14 @@
 {% load static %}
 {% block content %}
 <div class="container" >
+    <div class="form-group">
+        <a href="{% url 'home' %}">
+            <button  class="btn btn-dark" >
+                    Powrót
+            </button>
+        </a>
+    </div>
+</div>
 <div class="container">
     <table class="table table-striped table-bordered table-hover table-dark">
         <thead>
@@ -17,9 +25,7 @@
         <tbody>
             {% for billing in  billings %}
             <tr>
-                <th scope="row">
-                    <a href="{% url 'billing_detail' billing.id%}">{{ billing.id }}</a>
-                </th>
+                <th scope="row">{{ billing.id }}</th>
                 <td>{{ billing.owner }}</td>
                 <td>{{ billing.value }}</td>
                 <td>{{ billing.payment_date | date:"d/m/Y" }}</td>
