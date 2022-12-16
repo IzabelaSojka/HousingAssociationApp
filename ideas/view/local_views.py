@@ -28,6 +28,6 @@ def local(request):
     return render(request, 'registration/local/local.html', context)
 
 
-def local_delete(request, pk=None):
+def local_delete(request, pk = None):
     Local.objects.get(id=pk).delete()
     return redirect("local")

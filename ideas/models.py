@@ -40,9 +40,9 @@ class Report(models.Model):
     def __str__(self):
         return self.file_name
 
-class Comemnt(models.Model):
+class Comment(models.Model):
     id_report = models.ForeignKey(Report, on_delete=models.CASCADE, null=False, blank=False)
-    owner = models.OneToOneField(User, on_delete=models.CASCADE, null=False, blank=False)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
     content = models.TextField(("Komentarz"), null=False, blank=False)
 
     def __str__(self):

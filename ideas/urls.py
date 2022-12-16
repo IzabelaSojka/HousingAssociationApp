@@ -10,7 +10,7 @@ from .view.local_views import local, local_delete
 from .view.user_views import RegisterPage
 from .view.resident_views import resident, resident_detail
 from .view.administrator_views import administrator, adminEmail
-from .view.document_views import fileView
+from .view.document_views import fileView, comment
 from .view.user_views import editUser
 from .view.billing_views import billing_history, billing_update, billing, billing_detail, resident_billing, resident_billing_history
 
@@ -43,12 +43,9 @@ urlpatterns = [
 
     #document
     path('documents/', fileView, name='documents'),
+    path('comments/<int:pk>', comment, name='comments'),
 
     #other
     path('firebase-messaging-sw.js', showFirebaseJS, name="show_firebase_js"),
-
-
-
-
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
