@@ -27,6 +27,8 @@ def billing(request):
                 start_billing=request.POST['start_billing'],
                 end_billing=request.POST['end_billing'],
                 payment_date=request.POST['payment_date'],
+                addressee_name=request.POST['addressee_name'],
+                bank_account=request.POST['bank_account'],
             )
             billing.save()
             messages.success(request, f"Rachunek został dodany")

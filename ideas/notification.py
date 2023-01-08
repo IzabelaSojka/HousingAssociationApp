@@ -2,7 +2,7 @@ from django.http import HttpResponse
 
 registration_ids = ['cyPwQCcB4nJhQDTIoEzWYu:APA91bE2Jg6_aQH4zTlrDsGtfDFbxLLw68OY4TD0leNM0mKmLI7lDqv_0FF5U-4VXnbABKcCJnsikBBLWbKqzoOKO3by7UeXD8yY3_Z0fWVZLig9fcSQXKKONFWSKEjUv6idVXpXvvhU']
 
-def send_notification(tekst):
+def send_notification(data, status):
     fcm_api = "AAAAz54T37A:APA91bGngLlZjyBOZJ3KGVsYuRgllzbZaxhMjVbhEa3FaFdTVV6q3zVv2VRnDdDdH2uvOSp5V6G3OLfkKr0AqXMBB5ZDQWIhkGlWwHQAobkauBg5wNSSSC8hrtFEYobhW0N8mBtcCujF"
     url = "https://fcm.googleapis.com/fcm/send"
 
@@ -10,15 +10,24 @@ def send_notification(tekst):
         "Content-Type": "application/json",
         "Authorization": 'key=' + fcm_api}
 
-    payload = {
-        "registration_ids": registration_ids,
-        "priority": "high",
-        "notification": {
-            "body": tekst,
-            "title": 'test',
-            #"icon": "https://static.ktomalek.pl/blog/zdjecie/leki-zagrozone-brakiem-dostepnosci-maj-2018.jpg",
+    if status == 'nieoplacone':
+        payload = {
+            "registration_ids": registration_ids,
+            "priority": "high",
+            "notification": {
+                "body": data,
+                "title": 'Minął termin płatności',
+            }
         }
-    }
+    else:
+        payload = {
+            "registration_ids": registration_ids,
+            "priority": "high",
+            "notification": {
+                "body": data,
+                "title": 'Zbliża się termin płatności',
+            }
+        }
 
 def showFirebaseJS(request):
     data = 'importScripts("https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js");' \

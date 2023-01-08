@@ -8,7 +8,7 @@ from . import views
 from .notification import showFirebaseJS
 from .view.local_views import local, local_delete
 from .view.user_views import RegisterPage
-from .view.resident_views import resident, resident_detail
+from .view.resident_views import resident, resident_detail, resident_billings
 from .view.administrator_views import administrator, adminEmail
 from .view.document_views import fileView, comment
 from .view.user_views import editUser
@@ -31,6 +31,7 @@ urlpatterns = [
     #resident
     path('resident/', resident, name='resident'),
     path('resident_billing/', resident_billing, name='resident_billing'),
+    path('resident_billing_all/<int:pk>', resident_billings, name='resident_billing_all'),
     path('resident_detail/<int:pk>', resident_detail, name='resident_detail'),
 
     #user

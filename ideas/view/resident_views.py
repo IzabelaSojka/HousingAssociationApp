@@ -4,7 +4,7 @@ from django.shortcuts import render
 from ideas.forms import UserRegistrationForm
 from django.contrib import messages
 
-from ideas.models import Local
+from ideas.models import Local, Billing
 
 
 def resident(request):
@@ -31,3 +31,11 @@ def resident_detail(request, pk=None):
         'local': local,
     }
     return render(request, 'registration/resident/resident_detail.html', context)
+
+def resident_billings(request, pk=None):
+    local = Local.objects.get(owner=pk)
+    billing = Billing.objects.filter(owner=local.id).order_by('-payment_date')
+    context = {
+        'billing': billing,
+    }
+    return render(request, 'registration/resident/resident_billing_all.html', context)
